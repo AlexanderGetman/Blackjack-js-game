@@ -10,24 +10,32 @@
 </head>
 
 <body>
-    <div class="game-table">
+    <h1>Blackjack</h1>
+
+    <div class="wrapper">
+        <div class="game-table">
+            <div class="game-display">
+                <div class="cards-display">
+                    <div>PC cards: <span id="cards-pc"></span></div>
+                    <div>Your cards: <span id="cards-player"></span></div>
+                </div>
+                <div class="score-display">
+                    <div>Computer total score: <span id="pc-score"></span></div>
+                    <div>Your total score: <span id="player-score"></span></div>
+                </div>
+            </div>
         
-        <div>Computer cards: <span id="pc-cards"></span></div>
-        <div>Computer total score: <span id="pc-score"></span></div>
-        <div>Your cards: <span id="player-cards"></span></div>
-        <div>Your total score: <span id="player-score"></span></div>
-
-        <div class="buttons">
-            <button class="hit-button">Hit</button>
-            <button class="stand-button">Stand</button>
-            <button class="new-game-button">New Game</button>
+            <div class="buttons">
+                <button class="hit-button">Hit</button>
+                <button class="stand-button">Stand</button>
+                <button class="new-game-button">New Game</button>
+            </div>
+            <div class="bets">
+                <div class="bet-field">Your bet: <input type="text" size="6" id="bet" value="10"></div>
+                <div>Your wallet: <span id="wallet"></span></div>
+            </div>
+        
         </div>
-        <div class="bets">
-            <div class="bet-field">Your bet: <input type="text" size="6" id="bet" value="10"></div>
-            <div>Your wallet: <span id="wallet"></span></div>
-        </div>
-
-        <div>Your cards: <span id="cards-test"></span></div>
     </div>
 
     <script src="script.js"></script>

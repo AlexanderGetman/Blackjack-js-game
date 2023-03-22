@@ -1,3 +1,48 @@
-#cards-test > img {
-    max-height: 200px;
+* {
+    margin: 0;
+    font-size: 62.5%;
+    font-family: 'Roboto', Helvetica, sans-serif;    
+}
+
+body {
+    background-color: darkkhaki;
+    max-width: 980px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    color: rgb(51, 16, 90);
+    font-size: 8rem;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.game-table {
+    font-size: 4rem;
+    display: flex;
+    flex-direction: column;    
+    min-width: 60%;
+    margin-top: 5rem;
+    background: rgba(120, 120, 207, 0.4);
+    border-radius: 15px;
+}
+
+.game-display {
+    display: flex;
+    flex-direction: column;
+    height: 25rem;
+    font-size: 4rem;    
+    min-width: 100%;
+}
+
+.score-display {
+    margin-top: auto;
+}
+
+#cards-player > img, #cards-pc > img {
+    max-height: 10rem;
 }

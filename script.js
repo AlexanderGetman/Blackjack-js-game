@@ -8,18 +8,21 @@ let buttons = document.getElementsByTagName("button");
 let computerTotal = 0;
 let computerCards = [];
 
+let playerCards = [];
+let pcCards = [];
+
+const gameTable = document.querySelector('.game-table');
 const newGameButton = document.querySelector('.new-game-button');
 const hitButton = document.querySelector('.hit-button');
 const standButton = document.querySelector('.stand-button');
-const pcCards = document.getElementById('pc-cards');
-const playerCards = document.getElementById('player-cards');
 const pcScore = document.getElementById('pc-score');
 const playerScore = document.getElementById('player-score');
 const playerWallet = document.getElementById('wallet');
 const bet = document.getElementById("bet");
 playerWallet.innerHTML = wallet;
 
-const testCards = document.getElementById('cards-test');
+const playerCardsDisplay = document.getElementById('cards-player');
+const pcCardsDisplay = document.getElementById('cards-pc');
 
 let card = 0;
 let number = 0;
@@ -27,13 +30,6 @@ let currentBet;
 
 let imgFolder = "./cards";
 let imgExtension = ".png";
-let cardImg;
-testCards.innerHTML = '<img src="' + cardImg + '" alt="">'
-
-function updateCards() {
-    cardImg = imgFolder + "/" + card + imgExtension;
-    testCards.innerHTML += '<img src="' + cardImg + '" alt="">';
-}
 
 function resetGame() {
     cards = [];
@@ -44,11 +40,12 @@ function resetGame() {
     number = 0;
     hitButton.disabled = false;
     standButton.disabled = false;
-    pcCards.innerHTML = '';
-    playerCards.innerHTML = '';
+    pcCards = [];
+    playerCards = [];
     pcScore.innerHTML = '';
     playerScore.innerHTML = '';
-    testCards.innerHTML = '';
+    playerCardsDisplay.innerHTML = '';
+    pcCardsDisplay.innerHTML = '';
 }
 
 function extractNumber(str) {
@@ -154,17 +151,20 @@ function checkResults (total) {
 function hit() {
     generateCard();
     getCardValue();
-    updateCards();
+    cardImg = imgFolder + "/" + card + imgExtension;
+    playerCardsDisplay.innerHTML += '<img src="' + cardImg + '" alt="">';
     countTotal(number);
-    playerCards.innerHTML += card + " ";
+    playerCards.push(card);
     playerScore.innerHTML = total;
 }
 
 function hitPc() {
     generateCard();
     getCardValue();
+    cardImg = imgFolder + "/" + card + imgExtension;
+    pcCardsDisplay.innerHTML += '<img src="' + cardImg + '" alt="">';
     countTotalPc(number);
-    pcCards.innerHTML += card + " ";
+    pcCards.push(card);
     pcScore.innerHTML = computerTotal;
 }
 
