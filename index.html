@@ -16,14 +16,16 @@
         <div class="game-table">
             <div class="game-display">
                 <div class="cards-display">
-                    <div>PC cards: <span id="cards-pc"></span></div>
-                    <div>Your cards: <span id="cards-player"></span></div>
+                    <p>Computer cards:</p>
+                    <div><span id="cards-pc"><img src="./cards/back.png" alt=""></span></div>
+                    <p>Your cards:</p>
+                    <div><span id="cards-player"><img src="./cards/back.png" alt=""></span></div>
                 </div>
                 <div class="score-display">
-                    <div>Computer total score: <span id="pc-score"></span></div>
-                    <div>Your total score: <span id="player-score"></span></div>
+                    <div>Your score: <span id="player-score"></span></div>
+                    <div>Computer score: <span id="pc-score"></span></div>                    
                 </div>
-            </div>
+            </div>            
         
             <div class="buttons">
                 <button class="hit-button">Hit</button>
@@ -33,6 +35,10 @@
             <div class="bets">
                 <div class="bet-field">Your bet: <input type="text" size="6" id="bet" value="10"></div>
                 <div>Your wallet: <span id="wallet"></span></div>
+            </div>
+
+            <div>
+                <span class="result"></span>
             </div>
         
         </div>

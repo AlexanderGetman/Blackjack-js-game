@@ -19,6 +19,7 @@ const pcScore = document.getElementById('pc-score');
 const playerScore = document.getElementById('player-score');
 const playerWallet = document.getElementById('wallet');
 const bet = document.getElementById("bet");
+const resultDisplay = document.querySelector('.result');
 playerWallet.innerHTML = wallet;
 
 const playerCardsDisplay = document.getElementById('cards-player');
@@ -30,6 +31,9 @@ let currentBet;
 
 let imgFolder = "./cards";
 let imgExtension = ".png";
+
+hitButton.disabled = true;
+standButton.disabled = true;
 
 function resetGame() {
     cards = [];
@@ -46,6 +50,7 @@ function resetGame() {
     playerScore.innerHTML = '';
     playerCardsDisplay.innerHTML = '';
     pcCardsDisplay.innerHTML = '';
+    resultDisplay.innerHTML = '';
 }
 
 function extractNumber(str) {
@@ -58,7 +63,7 @@ function getRandomNumber(arr) {
 
 function generateCard() {
     if (cards.length == 52) {
-        console.log("Deck is empty");
+        resultDisplay.innerHTML = "Deck is empty";
         return;
     }
 
@@ -76,10 +81,13 @@ function containsNumbers(str) {
 
 function checkBet() {
     if (bet.value > wallet) {
-        console.log("Insufficient funds, set less bet");
+        resultDisplay.innerHTML =  "Insufficient funds, set less bet";
         newGameButton.disabled = true;
     } else if (wallet == 0) {
-        console.log("You are out of money");
+        resultDisplay.innerHTML = "You are out of money";
+        newGameButton.disabled = true;
+    } else if (bet.value < 10) {
+        resultDisplay.innerHTML =  "Bet can't be lower then 10";
         newGameButton.disabled = true;
     } else {
         newGameButton.disabled = false;
@@ -128,7 +136,7 @@ function win() {
     wallet = wallet + currentBet;
     playerWallet.innerHTML = wallet;
     disableButtons();
-    console.log("You win");
+    resultDisplay.innerHTML = "You win";
     checkBet();
 }
 
@@ -136,7 +144,7 @@ function loose() {
     wallet = wallet - currentBet;
     playerWallet.innerHTML = wallet;
     disableButtons();
-    console.log("You loose");
+    resultDisplay.innerHTML = "You loose";
     checkBet();
 }
 
