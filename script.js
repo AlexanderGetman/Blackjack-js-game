@@ -90,6 +90,7 @@ function checkBet() {
         resultDisplay.innerHTML =  "Bet can't be lower then 10";
         newGameButton.disabled = true;
     } else {
+        resultDisplay.innerHTML =  "";
         newGameButton.disabled = false;
     }
 }
@@ -176,6 +177,12 @@ function hitPc() {
     pcScore.innerHTML = computerTotal;
 }
 
+function natural() {
+    if (total == 21) {
+        currentBet = currentBet * 1.5;
+    }
+}
+
 newGameButton.addEventListener('click', () => {
     resetGame();
     currentBet = parseInt(bet.value);
@@ -183,6 +190,7 @@ newGameButton.addEventListener('click', () => {
     hit();
     hitPc();
     hitPc();
+    natural();
     newGameButton.disabled = true;
     checkResults(total);    
 });
@@ -207,8 +215,3 @@ standButton.addEventListener('click', () => {
     checkResults(total);
     pcStand();
 });
-
-/*Naturals.
-If a player's first two cards are an ace and a "ten-card" (a picture card or 10), giving a count of 21 in two cards, this is a natural or "blackjack." 
-If any player has a natural and the dealer does not, the dealer immediately pays that player one and a half times the amount of their bet.
-*/
