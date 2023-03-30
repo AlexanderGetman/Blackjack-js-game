@@ -99,7 +99,7 @@ bet.addEventListener('input', () => {
     checkBet();
 });
 
-function getCardValue() {
+function getCardValue(total) {
     if (containsNumbers(card) == true) {
         number = parseInt(extractNumber(card)[0]);
         return number;
@@ -137,29 +137,35 @@ function win() {
     wallet = wallet + currentBet;
     playerWallet.innerHTML = wallet;
     disableButtons();
-    resultDisplay.innerHTML = "You win";
     checkBet();
+    resultDisplay.innerHTML = "You win!";
 }
 
-function loose() {
+function loose() {    
     wallet = wallet - currentBet;
     playerWallet.innerHTML = wallet;
     disableButtons();
-    resultDisplay.innerHTML = "You loose";
     checkBet();
+    resultDisplay.innerHTML = "You loose!";
 }
 
 function checkResults (total) {
-    if (total == 21) {
-        win();
-    } else if (total > 21) {
+    if (total == 21) {        
+        win();        
+    } else if (total > 21) {        
         loose();
+    } else if (computerTotal >= 17) {
+        if (computerTotal > 21 || computerTotal < total) {            
+            win();
+        } else {
+            loose();
+        }
     }
 }
 
 function hit() {
     generateCard();
-    getCardValue();
+    getCardValue(total);
     cardImg = imgFolder + "/" + card + imgExtension;
     playerCardsDisplay.innerHTML += '<img src="' + cardImg + '" alt="">';
     countTotal(number);
@@ -169,7 +175,7 @@ function hit() {
 
 function hitPc() {
     generateCard();
-    getCardValue();
+    getCardValue(computerTotal);
     cardImg = imgFolder + "/" + card + imgExtension;
     pcCardsDisplay.innerHTML += '<img src="' + cardImg + '" alt="">';
     countTotalPc(number);
@@ -180,7 +186,8 @@ function hitPc() {
 function natural() {
     if (total == 21) {
         currentBet = currentBet * 1.5;
-    }
+        resultDisplay.innerHTML += " Natural!";
+    }    
 }
 
 newGameButton.addEventListener('click', () => {
@@ -189,10 +196,10 @@ newGameButton.addEventListener('click', () => {
     hit();
     hit();
     hitPc();
-    hitPc();
-    natural();
+    pcCardsDisplay.innerHTML += '<img src="./cards/back.png" alt="">';    
     newGameButton.disabled = true;
-    checkResults(total);    
+    checkResults(total);
+    natural();
 });
 
 hitButton.addEventListener('click', () => {
@@ -201,12 +208,12 @@ hitButton.addEventListener('click', () => {
 });
 
 function pcStand() {
-    if (computerTotal > 17) {
-        if (computerTotal > 21 || computerTotal < total) {            
-            win();
-        } else {            
-            loose();
-        }
+    var backImg = document.querySelector('img[src="./cards/back.png"]');
+    backImg.parentNode.removeChild(backImg);
+
+    while (computerTotal < 17) {
+        hitPc();
+        checkResults(total);
     }
 }
 
